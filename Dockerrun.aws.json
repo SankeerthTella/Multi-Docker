@@ -1,0 +1,38 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "stella3/multi-client",
+            "hostname": "client",   
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "stella3/multi-server",
+            "hostname": "api",   
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "stella3/multi-worker",
+            "hostname": "worker",   
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "stella3/multi-nginx",
+            "hostname": "nginx",   
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client","server"]
+        }
+
+    ]
+
+}
